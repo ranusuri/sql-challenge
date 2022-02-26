@@ -39,7 +39,7 @@ CREATE TABLE "dept_manager" (
 
 CREATE TABLE "salaries" (
     "emp_no" INTEGER   NOT NULL,
-    "salary" double   NOT NULL
+    "salary" FLOAT   NOT NULL
 );
 
 CREATE TABLE "titles" (
@@ -50,10 +50,13 @@ CREATE TABLE "titles" (
      )
 );
 
-ALTER TABLE "departments" ADD CONSTRAINT "fk_departments_dept_no" FOREIGN KEY("dept_no")
-REFERENCES "dept_manager" ("dept_no");
+ALTER TABLE "employees" ADD CONSTRAINT "fk_employees_emp_title_id" FOREIGN KEY("emp_title_id")
+REFERENCES "titles" ("title_id");
 
 ALTER TABLE "dept_emp" ADD CONSTRAINT "fk_dept_emp_dept_no" FOREIGN KEY("dept_no")
+REFERENCES "departments" ("dept_no");
+
+ALTER TABLE "dept_manager" ADD CONSTRAINT "fk_dept_manager_dept_no" FOREIGN KEY("dept_no")
 REFERENCES "departments" ("dept_no");
 
 ALTER TABLE "dept_manager" ADD CONSTRAINT "fk_dept_manager_emp_no" FOREIGN KEY("emp_no")
@@ -61,7 +64,4 @@ REFERENCES "employees" ("emp_no");
 
 ALTER TABLE "salaries" ADD CONSTRAINT "fk_salaries_emp_no" FOREIGN KEY("emp_no")
 REFERENCES "employees" ("emp_no");
-
-ALTER TABLE "titles" ADD CONSTRAINT "fk_titles_title_id" FOREIGN KEY("title_id")
-REFERENCES "employees" ("emp_title_id");
 
